@@ -9,9 +9,6 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("/users/{user}/repos")
-    fun listReposStr(@Path("user") user: String): Call<String>
-
-    @GET("/users/{user}/repos")
     fun listRepos(@Path("user") user: String): Call<List<Repo>>
 
 }
