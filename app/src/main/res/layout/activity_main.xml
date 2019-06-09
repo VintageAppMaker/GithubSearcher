@@ -13,37 +13,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/coordinator_layout"
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@id/bottom_nav"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+        >
+            <TextView
+                    android:textSize="24sp"
+                    android:textColor="#eeeeee"
+                    android:background="@color/cardview_dark_background"
+                    android:id="@+id/txtTitle"
+                    android:gravity="center"
+                    android:text="@{data.title}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                    android:orientation="vertical"
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcyMain"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <TextView
-                        android:textSize="18sp"
-                        android:textColor="#eeeeee"
-                        android:background="@color/cardview_dark_background"
-                        android:id="@+id/txtTitle"
-                        android:gravity="center"
-                        android:text="@{data.title}"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcyMain"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav"
