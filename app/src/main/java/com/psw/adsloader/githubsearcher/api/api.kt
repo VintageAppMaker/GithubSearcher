@@ -10,6 +10,9 @@ object api {
     val builder = OkHttpClient.Builder()
         .addInterceptor( HttpLoggingInterceptor().apply {
 
+            // Debug시에 모든 패킷을 덤프
+            setLevel(HttpLoggingInterceptor.Level.BODY)
+
         } )
 
     val function: ApiService

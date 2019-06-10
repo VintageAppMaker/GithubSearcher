@@ -15,4 +15,8 @@ interface ApiService {
     @GET("/users/{user}/repos")
     fun listRepos(@Path("user") user: String): Call<List<Repo>>
 
+    @GET("/users/{user}/repos")
+    fun listReposWithPage(@Path("user") user: String, @Query("page") page : Int): Call<List<Repo>>
+
+
 }
