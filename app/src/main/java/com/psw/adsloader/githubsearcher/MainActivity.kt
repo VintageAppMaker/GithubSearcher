@@ -98,12 +98,7 @@ class MainActivity : AppCompatActivity() {
         builder.show()
 
     }
-
-
-    val FIRST_PAGE  =  1
-    var nNextPage   =  FIRST_PAGE
-    val IS_END_PAGE = -1 // -1이면 end
-
+    
     private fun toNextPageWithEnd(bIsEnd : Boolean = false ){
          if(nNextPage != IS_END_PAGE ) nNextPage++
          if( bIsEnd )
@@ -191,6 +186,12 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    companion object {
+        val FIRST_PAGE  =  1
+        var nNextPage   =  FIRST_PAGE
+        val IS_END_PAGE = -1 // -1이면 end
     }
 
 
