@@ -21,6 +21,12 @@ import retrofit2.Response
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.psw.adsloader.githubsearcher.model.MainViewModel
+import android.R.string.cancel
+import android.content.DialogInterface
+import android.text.InputType
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         binder = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binder.bottomNav.setOnNavigationItemReselectedListener {
             when (it.itemId ){
-                (R.id.menu_search)   -> { loadUserInfo() }
+                (R.id.menu_search)   -> { askUser() }
                 else -> {}
             }
         }
@@ -75,12 +81,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun askUser() {
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("깃헙아이디")
+
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        builder.setView(input)
+
+        builder.setPositiveButton("예",
+            { dialog, which -> viewmodel.account.postValue(input.text.toString())  })
+        builder.setNegativeButton("취소",
+            { dialog, which -> dialog.cancel() })
+
+        builder.show()
+
     }
 
-    var nNextPage   =  1
+
+    val FIRST_PAGE  =  1
+    var nNextPage   =  FIRST_PAGE
     val IS_END_PAGE = -1 // -1이면 end
+
     private fun toNextPageWithEnd(bIsEnd : Boolean = false ){
          if(nNextPage != IS_END_PAGE ) nNextPage++
          if( bIsEnd )
@@ -88,7 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadRepoInfo() {
-        nNextPage = 1
+        nNextPage = FIRST_PAGE
         viewmodel.bLoading.postValue(true)
 
         api.function.listRepos(viewmodel.account.value.toString()).enqueue( object: Callback<List<Repo>>{
@@ -170,22 +193,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun loadUserInfo() {
 
-        viewmodel.bLoading.postValue(true)
-        api.function.getUser(viewmodel.account.value.toString()).enqueue( object: Callback<User>{
-
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                viewmodel.bLoading.postValue(false)
-            }
-
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                val user = response.body()
-                toast("팔로워:${user!!.followers}  팔로잉:${user!!.following}\nrepositories:${user!!.public_repos}\nlogin:${user!!.login}")
-                viewmodel.bLoading.postValue(false)
-
-            }
-        })
-
-    }
 }

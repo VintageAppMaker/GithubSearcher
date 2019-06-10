@@ -6,6 +6,7 @@
     <color name="colorBackground">#333333</color>
     <color name="colorCardText">#333333</color>
     <color name="colorCardBackground">#eeeeee</color>
+    <color name="colorCardBackground2">#FC7777</color>
     <color name="colordBackgroundRecycler">#333333</color>
 
 

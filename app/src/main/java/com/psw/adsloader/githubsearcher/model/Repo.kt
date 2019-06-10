@@ -6,6 +6,7 @@ data class User(
     var public_gists : Int,
     var followers    : Int,
     var following    : Int
+
 )
 
 
@@ -16,6 +17,7 @@ data class Repo(
     var stargazers_count : Int,
     var size             : Int,
     var description      : String?,
+    var clone_url        : String,
     var owner :Owner?
 )
 

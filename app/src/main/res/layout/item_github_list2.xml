@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="@color/colordBackgroundRecycler"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+            card_view:cardBackgroundColor="@color/colorCardBackground2"
+
+            android:layout_marginTop    ="4dp"
+            android:layout_marginLeft   ="15dp"
+            android:layout_marginRight  ="15dp"
+            android:layout_marginBottom ="4dp"
+
+            card_view:cardCornerRadius="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:textColor="@color/colorCardText"
+                    android:layout_marginLeft ="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtName"
+            />
+
+
+
+            <TextView
+                    android:textColor="@color/colorCardText"
+                    android:textSize="18sp"
+                    android:layout_margin="15dp"
+                    android:id="@+id/txtCloneUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:layout_weight="0.1"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/ic_sentiment_very_dissatisfied_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:textColor="@color/colorCardText"
+                        android:text="I want more Star~"
+                        android:gravity="center"
+                        android:layout_weight="0.9"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
