@@ -20,7 +20,7 @@ dependencies에서 다음추가
 
 ~~~
 
-
+- retrofit 초기세팅 
 ~~~kotlin
 
 // 1. addInterceptor는 해더에 값을 추가하거나 덤프를 떠야할 때 사용 
@@ -48,6 +48,8 @@ object api {
         }
 }
 ~~~
+
+- API 정의(URL)
 
 ~~~kotlin
 
@@ -78,6 +80,8 @@ interface ApiService {
   fun postTest(@Body params: [클래스]): Call<ResponseBody>
 */
 ~~~
+
+- JSON을 Data와 매칭 
 
 ~~~kotlin
 
