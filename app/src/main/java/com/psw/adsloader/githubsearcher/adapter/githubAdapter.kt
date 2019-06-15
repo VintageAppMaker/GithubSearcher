@@ -1,6 +1,8 @@
 package com.psw.adsloader.githubsearcher.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import com.psw.adsloader.githubsearcher.model.Repo
 import kotlinx.android.synthetic.main.item_github_list.view.*
 import kotlinx.android.synthetic.main.item_github_list.view.txtName
 import kotlinx.android.synthetic.main.item_github_list2.view.*
+
 
 class GithubAdapter(val items : List<Repo>, val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -37,15 +40,11 @@ class GithubAdapter(val items : List<Repo>, val context: Context) : RecyclerView
 
         when (holder.itemViewType){
             TYPE_ONE -> { (holder as githubHolder).apply {
-                txtName.text = mItems.get(position).name
-                txtSize.text = mItems.get(position).size.toString()
-                txtStar.text = mItems.get(position).stargazers_count.toString()
-                txtDescription.text = mItems.get(position).description
+                bind(context, mItems.get(position))
             }}
 
             TYPE_TWO -> { (holder as githubHolder2).apply {
-                txtName.text = mItems.get(position).name
-                txtCloneUrl.text = mItems.get(position).clone_url
+                bind(context, mItems.get(position))
             }}
         }
 
@@ -68,9 +67,33 @@ class githubHolder (view: View) : RecyclerView.ViewHolder(view) {
     var txtSize : TextView = view.txtSize
     var txtStar : TextView = view.txtStar
     var txtDescription : TextView = view.txtDescription
+
+    fun bind(context : Context, item : Repo){
+        txtName.text = item.name
+        txtSize.text = item.size.toString()
+        txtStar.text = item.stargazers_count.toString()
+        txtDescription.text = item.description
+
+        txtDescription.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+    }
 }
 
 class githubHolder2 (view: View) : RecyclerView.ViewHolder(view) {
     var txtName : TextView = view.txtName
     var txtCloneUrl : TextView = view.txtCloneUrl
+
+    fun bind(context : Context,item : Repo){
+        txtName.text = item.name
+        txtCloneUrl.text = item.clone_url
+        txtCloneUrl.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+    }
+
 }

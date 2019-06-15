@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         builder.show()
 
     }
-    
+
     private fun toNextPageWithEnd(bIsEnd : Boolean = false ){
          if(nNextPage != IS_END_PAGE ) nNextPage++
          if( bIsEnd )
