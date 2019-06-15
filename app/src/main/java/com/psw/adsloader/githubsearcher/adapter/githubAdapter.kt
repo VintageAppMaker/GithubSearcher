@@ -24,6 +24,11 @@ class GithubAdapter(val items : List<Repo>, val context: Context) : RecyclerView
         notifyDataSetChanged()
     }
 
+    fun clearItems(){
+        mItems.clear()
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return mItems.size
     }
@@ -51,7 +56,7 @@ class GithubAdapter(val items : List<Repo>, val context: Context) : RecyclerView
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(mItems.get(position).stargazers_count > 1) TYPE_ONE else TYPE_TWO
+        return if(mItems.get(position).stargazers_count > 0) TYPE_ONE else TYPE_TWO
     }
 
     companion object {

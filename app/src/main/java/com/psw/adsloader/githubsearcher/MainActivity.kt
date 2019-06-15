@@ -54,11 +54,18 @@ class MainActivity : AppCompatActivity() {
             loadRepoInfo()
         })
 
+        viewmodel.title.observe(this, Observer<String>{
+            binder.data = MainActivityData().apply { title = it }
+        })
 
         binder = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binder.bottomNav.setOnNavigationItemReselectedListener {
             when (it.itemId ){
-                (R.id.menu_search)   -> { askUser() }
+                (R.id.menu_search)   -> {
+                    adapter.clearItems()
+                    viewmodel.title.postValue("${adapter.mItems.size} repositories")
+                    askUser()
+                }
                 else -> {}
             }
         }
@@ -141,8 +148,7 @@ class MainActivity : AppCompatActivity() {
                     binder.rcyMain.adapter = adapter
                 }
 
-                binder.data = MainActivityData().apply { title = "${adapter.mItems.size} repositories" }
-
+                viewmodel.title.postValue("${adapter.mItems.size} repositories")
                 viewmodel.bLoading.postValue(false)
 
             }
@@ -182,7 +188,7 @@ class MainActivity : AppCompatActivity() {
                     adapter.addItems(it)
                 }
 
-                binder.data = MainActivityData().apply { title = "${adapter.mItems.size} repositories" }
+                viewmodel.title.postValue("${adapter.mItems.size} repositories")
                 viewmodel.bLoading.postValue(false)
 
             }
