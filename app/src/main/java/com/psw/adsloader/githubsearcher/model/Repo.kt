@@ -1,5 +1,7 @@
 package com.psw.adsloader.githubsearcher.model
 
+sealed class GithubData
+
 data class User(
     var login        : String,
     var public_repos : Int,
@@ -7,7 +9,7 @@ data class User(
     var followers    : Int,
     var following    : Int
 
-)
+) : GithubData()
 
 
 data class Repo(
@@ -19,6 +21,6 @@ data class Repo(
     var description      : String?,
     var clone_url        : String,
     var owner :Owner?
-)
+) : GithubData()
 
 data class Owner(var html_url : String)

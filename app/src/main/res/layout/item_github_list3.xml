@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="@color/colorBackgroundRecycler"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+            card_view:cardBackgroundColor="@color/colorCardBackground3"
+
+            android:layout_marginTop    ="4dp"
+            android:layout_marginLeft   ="15dp"
+            android:layout_marginRight  ="15dp"
+            android:layout_marginBottom ="4dp"
+
+            card_view:cardCornerRadius="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:gravity="center|left"
+                        android:text="account"
+                        android:textColor="@color/colorCardText"
+                        android:layout_weight="0.3"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+
+                <TextView
+                        android:id="@+id/txtAccount"
+                        android:textSize="24sp"
+                        android:textColor="@color/colorCardText"
+                        android:gravity="center"
+                        android:text="User"
+                        android:layout_weight="0.7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:gravity="center|left"
+                        android:textColor="@color/colorCardText"
+                        android:text="public"
+                        android:layout_weight="0.3"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/txtPublic"
+                        android:textColor="@color/colorCardText"
+                        android:gravity="center"
+                        android:text="User"
+                        android:layout_weight="0.7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:gravity="center|left"
+                        android:textColor="@color/colorCardText"
+                        android:text="gist"
+                        android:layout_weight="0.3"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/txtGist"
+                        android:textColor="@color/colorCardText"
+                        android:gravity="center"
+                        android:text="User"
+                        android:layout_weight="0.7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

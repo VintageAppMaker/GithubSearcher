@@ -7,6 +7,7 @@
     <color name="colorCardText">#333333</color>
     <color name="colorCardBackground">#eeeeee</color>
     <color name="colorCardBackground2">#FC7777</color>
+    <color name="colorCardBackground3">#8BC34A</color>
     <color name="colorBackgroundRecycler">#333333</color>
     <color name="colorHyperLink">#0159BD</color>
 

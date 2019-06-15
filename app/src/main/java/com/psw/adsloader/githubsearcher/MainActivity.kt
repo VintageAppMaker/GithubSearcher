@@ -27,6 +27,7 @@ import android.text.InputType
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.psw.adsloader.githubsearcher.model.GithubData
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         viewmodel.account.observe(this, Observer<String> {
             // 이름이 바뀌면 바로검색
-            loadRepoInfo()
+            loadUserInfo()
         })
 
         viewmodel.title.observe(this, Observer<String>{
@@ -85,6 +86,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        GithubAdapter(mutableListOf<GithubData>(), applicationContext)?.let{
+            adapter = it
+            binder.rcyMain.adapter = adapter
+        }
+
         viewmodel.account.postValue("square")
 
     }
@@ -115,6 +121,36 @@ class MainActivity : AppCompatActivity() {
              nNextPage = IS_END_PAGE
     }
 
+    private fun loadUserInfo() {
+        nNextPage = FIRST_PAGE
+        viewmodel.bLoading.postValue(true)
+
+        api.function.getUser(viewmodel.account.value.toString()).enqueue( object: Callback<User>{
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                viewmodel.bLoading.postValue(false)
+            }
+
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                val User = response.body()
+
+                if(User == null ){
+                    viewmodel.bLoading.postValue(false)
+                    return
+                }
+
+                var items = mutableListOf<GithubData>().apply{
+                    add(User as GithubData)
+                }
+                adapter.addItems(items)
+                loadRepoInfo()
+
+            }
+
+        })
+
+    }
+
     private fun loadRepoInfo() {
         nNextPage = FIRST_PAGE
         viewmodel.bLoading.postValue(true)
@@ -143,12 +179,9 @@ class MainActivity : AppCompatActivity() {
                 toNextPageWithEnd()
 
                 repos?.forEachIndexed { index, repo ->   repo.name = "${index}.${repo.name}" }
-                GithubAdapter(repos!!, applicationContext)?.let{
-                    adapter = it
-                    binder.rcyMain.adapter = adapter
-                }
+                adapter.addItems(repos)
 
-                viewmodel.title.postValue("${adapter.mItems.size} repositories")
+                viewmodel.title.postValue("${adapter.mItems.size -1} repositories")
                 viewmodel.bLoading.postValue(false)
 
             }
@@ -188,7 +221,7 @@ class MainActivity : AppCompatActivity() {
                     adapter.addItems(it)
                 }
 
-                viewmodel.title.postValue("${adapter.mItems.size} repositories")
+                viewmodel.title.postValue("${adapter.mItems.size - 1} repositories")
                 viewmodel.bLoading.postValue(false)
 
             }

@@ -9,17 +9,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.psw.adsloader.githubsearcher.R
+import com.psw.adsloader.githubsearcher.model.GithubData
 import com.psw.adsloader.githubsearcher.model.Repo
+import com.psw.adsloader.githubsearcher.model.User
 import kotlinx.android.synthetic.main.item_github_list.view.*
 import kotlinx.android.synthetic.main.item_github_list.view.txtName
 import kotlinx.android.synthetic.main.item_github_list2.view.*
+import kotlinx.android.synthetic.main.item_github_list3.view.*
 
 
-class GithubAdapter(val items : List<Repo>, val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GithubAdapter(val items : List<GithubData>, val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var mItems : MutableList <Repo> = items.toMutableList()
+    var mItems : MutableList <GithubData> = items.toMutableList()
 
-    fun addItems( its : List<Repo>){
+    fun addItems( its : List<GithubData>){
         mItems.addAll(its)
         notifyDataSetChanged()
     }
@@ -35,8 +38,9 @@ class GithubAdapter(val items : List<Repo>, val context: Context) : RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType){
-            TYPE_ONE -> {githubHolder(LayoutInflater.from(context).inflate(R.layout.item_github_list, parent, false))}
-            TYPE_TWO -> {githubHolder2(LayoutInflater.from(context).inflate(R.layout.item_github_list2, parent, false))}
+            TYPE_ONE   -> {githubHolder(LayoutInflater.from(context).inflate(R.layout.item_github_list, parent, false))}
+            TYPE_TWO   -> {githubHolder2(LayoutInflater.from(context).inflate(R.layout.item_github_list2, parent, false))}
+            TYPE_THREE -> {githubHolder3(LayoutInflater.from(context).inflate(R.layout.item_github_list3, parent, false))}
             else -> {githubHolder(LayoutInflater.from(context).inflate(R.layout.item_github_list, parent, false))}
         }
     }
@@ -45,23 +49,37 @@ class GithubAdapter(val items : List<Repo>, val context: Context) : RecyclerView
 
         when (holder.itemViewType){
             TYPE_ONE -> { (holder as githubHolder).apply {
-                bind(context, mItems.get(position))
+                var item = mItems.get(position) as Repo
+                bind(context,  item)
             }}
 
             TYPE_TWO -> { (holder as githubHolder2).apply {
-                bind(context, mItems.get(position))
+                var item = mItems.get(position) as Repo
+                bind(context, item)
+            }}
+
+            TYPE_THREE -> { (holder as githubHolder3).apply {
+                var item = mItems.get(position) as User
+                bind(context, item)
             }}
         }
 
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(mItems.get(position).stargazers_count > 0) TYPE_ONE else TYPE_TWO
+        return when (mItems.get(position)){
+            is Repo -> {
+                var item = mItems.get(position) as Repo
+                if( item.stargazers_count > 0) TYPE_ONE else TYPE_TWO
+            }
+            else    -> {TYPE_THREE}
+        }
     }
 
     companion object {
-        private const val TYPE_ONE = 0
-        private const val TYPE_TWO = 1
+        private const val TYPE_ONE   = 0
+        private const val TYPE_TWO   = 1
+        private const val TYPE_THREE = 3
     }
 }
 
@@ -104,4 +122,16 @@ class githubHolder2 (view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
+}
+
+class githubHolder3 (view: View) : RecyclerView.ViewHolder(view) {
+    var txtName   : TextView = view.txtAccount
+    var txtPublic : TextView = view.txtPublic
+    var txtGist   : TextView = view.txtGist
+
+    fun bind(context : Context,item : User){
+        txtName.text    = item.login
+        txtPublic.text  = item.public_repos.toString()
+        txtGist.text    = item.public_gists.toString()
+    }
 }
