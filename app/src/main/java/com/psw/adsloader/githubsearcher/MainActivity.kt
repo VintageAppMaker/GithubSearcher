@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("깃헙아이디")
 
         val input = EditText(this)
-        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        input.inputType = InputType.TYPE_CLASS_TEXT
         builder.setView(input)
 
         builder.setPositiveButton("예",
