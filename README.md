@@ -144,53 +144,75 @@ DataBinding
 
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
->
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
         <variable
-                name="BindData"
-                type="com.example.databindingquickstart.BindData" />
+                name="data"
+                type="com.psw.adsloader.githubsearcher.view.MainActivityData" />
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-    >
+            android:layout_height="match_parent">
 
-        <TextView
-                android:id="@+id/txt_title"
-                android:layout_width="match_parent"
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/linearLayout">
+            <TextView
+                    android:textSize="24sp"
+                    android:textColor="#eeeeee"
+                    android:background="@color/colorBackground"
+                    android:id="@+id/txtTitle"
+                    android:gravity="center"
+                    android:text="@{data.title}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:background="@color/colorBackgroundRecycler"
+                    android:id="@+id/rcyMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_nav"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@{BindData.showMessage}"
-        />
+                android:background="@color/colorBackground"
+                app:itemIconSize="20dp"
+                app:itemIconTint="#FFFFFF"
+                app:itemTextColor="#00FFFF"
+                app:itemHorizontalTranslationEnabled="false"
+                app:labelVisibilityMode="labeled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/menu_nav" >
 
-        <TextView
-                android:id="@+id/txt_title2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FF0000"
-                android:padding="16dp"
-                android:text="@{BindData.showMessage}"
-        />
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-        <TextView
-                android:id="@+id/txt_title3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#00BCD4"
-                android:padding="16dp"
-                android:text="@{BindData.showMessage}"
-        />
 
-        <EditText
-                android:id="@+id/edt_message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/prgLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/bottom_nav" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
 
