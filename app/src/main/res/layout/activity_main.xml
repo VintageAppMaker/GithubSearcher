@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:background="@color/colordBackgroundRecycler"
+                    android:background="@color/colorBackgroundRecycler"
                     android:id="@+id/rcyMain"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

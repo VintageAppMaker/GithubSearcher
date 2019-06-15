@@ -24,6 +24,7 @@ import com.psw.adsloader.githubsearcher.model.MainViewModel
 import android.R.string.cancel
 import android.content.DialogInterface
 import android.text.InputType
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 
@@ -87,7 +88,9 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("깃헙아이디")
 
         val input = EditText(this)
-        input.inputType = InputType.TYPE_CLASS_TEXT
+        input.inputType  = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE
+        input.imeOptions = EditorInfo.IME_ACTION_DONE
+
         builder.setView(input)
 
         builder.setPositiveButton("예",

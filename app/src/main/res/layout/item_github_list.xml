@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
-              android:background="@color/colordBackgroundRecycler"
+              android:background="@color/colorBackgroundRecycler"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
@@ -89,7 +89,7 @@
             </LinearLayout>
 
             <TextView
-                    android:textColor="@color/colorCardText"
+                    android:textColor="@color/colorHyperLink"
                     android:textSize="18sp"
                     android:layout_margin="15dp"
                     android:id="@+id/txtDescription"

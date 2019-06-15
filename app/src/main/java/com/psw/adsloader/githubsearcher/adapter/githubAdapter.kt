@@ -72,13 +72,16 @@ class githubHolder (view: View) : RecyclerView.ViewHolder(view) {
         txtName.text = item.name
         txtSize.text = item.size.toString()
         txtStar.text = item.stargazers_count.toString()
-        txtDescription.text = item.description
 
-        txtDescription.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
+        txtDescription.apply{
+            text = if ( item.description != null )  item.description else "설명없음"
+            setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
+            }
         }
+
     }
 }
 
