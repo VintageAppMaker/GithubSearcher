@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
             binder.rcyMain.adapter = adapter
         }
 
-        viewmodel.account.postValue("square")
+        viewmodel.account.postValue("google")
 
     }
 
