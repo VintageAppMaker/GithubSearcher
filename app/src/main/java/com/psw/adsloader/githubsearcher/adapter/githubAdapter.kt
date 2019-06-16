@@ -6,8 +6,10 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.psw.adsloader.githubsearcher.R
 import com.psw.adsloader.githubsearcher.model.GithubData
 import com.psw.adsloader.githubsearcher.model.Repo
@@ -125,13 +127,31 @@ class githubHolder2 (view: View) : RecyclerView.ViewHolder(view) {
 }
 
 class githubHolder3 (view: View) : RecyclerView.ViewHolder(view) {
-    var txtName   : TextView = view.txtAccount
-    var txtPublic : TextView = view.txtPublic
-    var txtGist   : TextView = view.txtGist
+    var txtName   :  TextView  = view.txtAccount
+    var txtPublic :  TextView  = view.txtPublic
+    var txtGist   :  TextView  = view.txtGist
+    var txtBio    :  TextView  = view.txtBio
+    var imgProfile : ImageView = view.imgProfile
+
+    var txtFollowers : TextView = view.txtFollowers
+    var txtFolling   : TextView = view.txtFollowing
+
 
     fun bind(context : Context,item : User){
         txtName.text    = item.login
-        txtPublic.text  = item.public_repos.toString()
-        txtGist.text    = item.public_gists.toString()
+
+        txtPublic.text     = item.public_repos.toString()
+        txtGist.text       = item.public_gists.toString()
+        txtFollowers.text  = item.followers.toString()
+        txtFolling.text    = item.following.toString()
+
+        txtBio.text     = item.bio
+
+        if(item.avatar_url == "null") return
+        Glide.with(context)
+            .load(item.avatar_url)
+            .fitCenter()
+            .into(imgProfile)
+        imgProfile
     }
 }

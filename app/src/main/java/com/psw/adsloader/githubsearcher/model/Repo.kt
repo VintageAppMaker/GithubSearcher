@@ -7,7 +7,9 @@ data class User(
     var public_repos : Int,
     var public_gists : Int,
     var followers    : Int,
-    var following    : Int
+    var following    : Int,
+    var bio          : String,
+    var avatar_url   : String
 
 ) : GithubData()
 

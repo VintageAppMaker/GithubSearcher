@@ -53,57 +53,148 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:orientation="horizontal"
+                    android:background="@color/colorCardBackground"
                     android:weightSum="1"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <TextView
-                        android:gravity="center|left"
-                        android:textColor="@color/colorCardText"
-                        android:text="public"
-                        android:layout_weight="0.3"
-                        android:layout_margin="5dp"
+                <ImageView
+                        android:id="@+id/imgProfile"
+                        android:layout_weight="0.4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"/>
 
-                <TextView
-                        android:id="@+id/txtPublic"
-                        android:textColor="@color/colorCardText"
-                        android:gravity="center"
-                        android:text="User"
-                        android:layout_weight="0.7"
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight="0.6"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="wrap_content">
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:weightSum="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:alpha="0.5"
+                                android:gravity="center|left"
+                                android:textColor="@color/colorCardText"
+                                android:text="public"
+                                android:layout_weight="0.2"
+                                android:layout_margin="5dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:id="@+id/txtPublic"
+                                android:textColor="@color/colorCardText"
+                                android:gravity="center|left"
+                                android:text="User"
+                                android:layout_weight="0.8"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:weightSum="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:alpha="0.5"
+                                android:gravity="center|left"
+                                android:textColor="@color/colorCardText"
+                                android:text="gist"
+                                android:layout_weight="0.2"
+                                android:layout_margin="5dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:id="@+id/txtGist"
+                                android:textColor="@color/colorCardText"
+                                android:gravity="center|left"
+                                android:text="User"
+                                android:layout_weight="0.8"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:weightSum="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:alpha="0.5"
+                                android:gravity="center|left"
+                                android:textColor="@color/colorCardText"
+                                android:text="Followers"
+                                android:layout_weight="0.4"
+                                android:layout_margin="5dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:id="@+id/txtFollowers"
+                                android:textColor="@color/colorCardText"
+                                android:gravity="center|left"
+                                android:text="User"
+                                android:layout_weight="0.6"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:weightSum="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:alpha="0.5"
+                                android:gravity="center|left"
+                                android:textColor="@color/colorCardText"
+                                android:text="Following"
+                                android:layout_weight="0.4"
+                                android:layout_margin="5dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"/>
+
+                        <TextView
+                                android:id="@+id/txtFollowing"
+                                android:textColor="@color/colorCardText"
+                                android:gravity="center|left"
+                                android:text="User"
+                                android:layout_weight="0.6"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:weightSum="1"
+
+
+            <TextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/txtBio"
+                    android:textColor="@color/colorCardText"
+                    android:gravity="center|left"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <TextView
-                        android:gravity="center|left"
-                        android:textColor="@color/colorCardText"
-                        android:text="gist"
-                        android:layout_weight="0.3"
-                        android:layout_margin="5dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:id="@+id/txtGist"
-                        android:textColor="@color/colorCardText"
-                        android:gravity="center"
-                        android:text="User"
-                        android:layout_weight="0.7"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"/>
-
-            </LinearLayout>
-
+                    android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
