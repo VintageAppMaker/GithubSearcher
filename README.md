@@ -3,6 +3,7 @@
 - Databinding
 - viewModel
 - retrofit2
+- coroutine
 - RecyclerView(MultiViewHolder)
 를 간략하게 사용한 예제
 
@@ -15,10 +16,11 @@
 app의 build.gradle에서 
 dependencies에서 다음추가  
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 
 ~~~
 
@@ -27,7 +29,6 @@ dependencies에서 다음추가
 
 // 1. addInterceptor는 해더에 값을 추가하거나 덤프를 떠야할 때 사용 
 // 2. addConverterFactory에서는 Gson 사용하기를 권장 
-
 object api {
     val BASE = "https://api.github.com"
     val builder = OkHttpClient.Builder()
@@ -58,19 +59,26 @@ object api {
 // @get  -> get 방식
 // @Query -> queryString value
 // @post -> post 방식 
+// Gson 사용하기를 하더라도 리턴값을 JSonObject로 정하고 가져올 수 있다. 
 interface ApiService {
-
+    
+    // suspend 사용.
+    // 코루틴에서 사용하기 위함. API호출시 리턴값으로 바로 데이터 값을 가져온다. 
+    // Retrofit 2.6.0 이상에서 가능함 
+    
     @GET("/users/{user}")
-    fun getUser(@Path("user") user: String): Call<User>
+    suspend fun getUser(@Path("user") user: String): User
 
     @GET("/users/{user}/repos")
-    fun listRepos(@Path("user") user: String): Call<List<Repo>>
+    suspend fun listRepos(@Path("user") user: String): List<Repo>
 
+    // 리턴값으로 Call<데이터형>을 받는다. callback 형식으로 받아서 처리한다. 
     @GET("/users/{user}/repos")
     fun listReposWithPage(@Path("user") user: String, @Query("page") page : Int): Call<List<Repo>>
 
 }
 
+// 
 /*
   1. JSON 필드명만 일치한다면 일부 필드만 가져와서 클래스에 대입시킬 수 있다.  
   2. Post로 해더와 데이터 보내기   

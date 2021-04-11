@@ -11,7 +11,6 @@ import com.psw.adsloader.githubsearcher.adapter.GithubAdapter
 import com.psw.adsloader.githubsearcher.api.api
 import com.psw.adsloader.githubsearcher.databinding.ActivityMainBinding
 import com.psw.adsloader.githubsearcher.model.Repo
-import com.psw.adsloader.githubsearcher.model.User
 import com.psw.adsloader.githubsearcher.util.toast
 import com.psw.adsloader.githubsearcher.view.MainActivityData
 import retrofit2.Call
@@ -21,12 +20,11 @@ import retrofit2.Response
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.psw.adsloader.githubsearcher.model.MainViewModel
-import android.R.string.cancel
-import android.content.DialogInterface
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.psw.adsloader.githubsearcher.api.IORoutine
 import com.psw.adsloader.githubsearcher.model.GithubData
 
 
@@ -44,20 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpUI() {
 
-        viewmodel =  ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewmodel.bLoading.observe(this, Observer<Boolean> {
-            // 바인딩된 bindData에 값을 넣었을 때...
-            binder.prgLoading.visibility = if( it ) View.VISIBLE else View.GONE
-        })
-
-        viewmodel.account.observe(this, Observer<String> {
-            // 이름이 바뀌면 바로검색
-            loadUserInfo()
-        })
-
-        viewmodel.title.observe(this, Observer<String>{
-            binder.data = MainActivityData().apply { title = it }
-        })
+        UIObserver()
 
         binder = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binder.bottomNav.setOnNavigationItemReselectedListener {
@@ -95,6 +80,37 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun UIObserver() {
+        viewmodel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewmodel.apply {
+            bLoading.observe(this@MainActivity, Observer<Boolean> {
+                // 바인딩된 bindData에 값을 넣었을 때...
+                binder.prgLoading.visibility = if (it) View.VISIBLE else View.GONE
+            })
+
+            account.observe(this@MainActivity, Observer<String> {
+                // 이름이 바뀌면 바로검색
+                loadUserInfo()
+                // 레포정보를 추가
+                loadRepoInfo()
+            })
+
+            title.observe(this@MainActivity, Observer<String> {
+                binder.data = MainActivityData().apply { title = it }
+            })
+
+            // 코루틴에서 추가함
+            lst.observe(this@MainActivity, Observer {
+                // 사용자 정보를 추가
+                adapter.addItems(it)
+            })
+
+            message.observe(this@MainActivity, Observer {
+                toast(it)
+            })
+        }
+    }
+
     private fun askUser() {
 
         val builder = AlertDialog.Builder(this)
@@ -125,28 +141,23 @@ class MainActivity : AppCompatActivity() {
         nNextPage = FIRST_PAGE
         viewmodel.bLoading.postValue(true)
 
-        api.function.getUser(viewmodel.account.value.toString()).enqueue( object: Callback<User>{
+        // 코투틴과 Retrofit 사용방법을 위한 예제
+        // UI처리는 반드시 LiveData로 보낸다.
+        // 그렇게 하지않으면 Context간의 차이로 App이 종료됨
+        IORoutine({
+            val u = api.function.getUser(viewmodel.account.value.toString())
+            if(u == null) return@IORoutine
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                viewmodel.bLoading.postValue(false)
+            // 데이터처리
+            var items = mutableListOf<GithubData>().apply{
+                add(u as GithubData)
             }
 
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                val User = response.body()
-
-                if(User == null ){
-                    viewmodel.bLoading.postValue(false)
-                    return
-                }
-
-                var items = mutableListOf<GithubData>().apply{
-                    add(User as GithubData)
-                }
-                adapter.addItems(items)
-                loadRepoInfo()
-
-            }
-
+            // UI에 전송
+            viewmodel.lst.postValue(items)
+        }, {
+            viewmodel.bLoading.postValue(false)
+            viewmodel.message.postValue("$it")
         })
 
     }
@@ -155,37 +166,31 @@ class MainActivity : AppCompatActivity() {
         nNextPage = FIRST_PAGE
         viewmodel.bLoading.postValue(true)
 
-        api.function.listRepos(viewmodel.account.value.toString()).enqueue( object: Callback<List<Repo>>{
-
-            override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
+        IORoutine({
+            val l = api.function.listRepos(viewmodel.account.value.toString())
+            if(l == null){
                 viewmodel.bLoading.postValue(false)
+                toNextPageWithEnd(true)
+                return@IORoutine
             }
 
-            override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
-                val repos = response.body()
-
-                if(repos == null){
-                    viewmodel.bLoading.postValue(false)
-                    toNextPageWithEnd(true)
-                    return
-                }
-
-                if(repos.size < 1){
-                    viewmodel.bLoading.postValue(false)
-                    toNextPageWithEnd(true)
-                    return
-                }
-
-                toNextPageWithEnd()
-
-                repos?.forEachIndexed { index, repo ->   repo.name = "${index}.${repo.name}" }
-                adapter.addItems(repos)
-
-                viewmodel.title.postValue("${adapter.mItems.size -1} repositories")
+            if(l.size < 1){
                 viewmodel.bLoading.postValue(false)
-
+                toNextPageWithEnd(true)
+                return@IORoutine
             }
 
+            toNextPageWithEnd()
+
+            l?.forEachIndexed { index, repo ->   repo.name = "${index}.${repo.name}" }
+
+            viewmodel.lst.postValue(l)
+            viewmodel.title.postValue("${adapter.mItems.size -1} repositories")
+            viewmodel.bLoading.postValue(false)
+
+        }, {
+            viewmodel.bLoading.postValue(false)
+            viewmodel.message.postValue("$it")
         })
 
     }
@@ -193,6 +198,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadRepoInfoWithPage() {
         viewmodel.bLoading.postValue(true)
 
+        // 코루틴을 사용하지 않는방법
         api.function.listReposWithPage(viewmodel.account.value.toString(), nNextPage).enqueue( object: Callback<List<Repo>>{
 
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
