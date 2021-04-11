@@ -1,10 +1,12 @@
-package com.psw.adsloader.githubsearcher.model
+package com.psw.adsloader.githubsearcher.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.psw.adsloader.githubsearcher.MainActivity
 import com.psw.adsloader.githubsearcher.api.IORoutine
 import com.psw.adsloader.githubsearcher.api.api
+import com.psw.adsloader.githubsearcher.model.GithubData
+import com.psw.adsloader.githubsearcher.model.Repo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

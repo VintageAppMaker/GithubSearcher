@@ -14,7 +14,7 @@ import com.psw.adsloader.githubsearcher.view.MainActivityData
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.psw.adsloader.githubsearcher.model.MainViewModel
+import com.psw.adsloader.githubsearcher.viewmodel.MainViewModel
 import android.text.InputType
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
