@@ -19,6 +19,9 @@ class MainViewModel :ViewModel(){
 
     var message   : MutableLiveData< String > = MutableLiveData()
 
+    //귀찮다. repo 갯수
+    var totalCount = 0
+
     init{
         bLoading.value = false
     }
@@ -38,6 +41,8 @@ class MainViewModel :ViewModel(){
             var items = mutableListOf<GithubData>().apply{
                 add(u as GithubData)
             }
+
+            totalCount = u.public_repos
 
             // UI에 전송
             lst.postValue(items)
@@ -71,7 +76,7 @@ class MainViewModel :ViewModel(){
             l?.forEachIndexed { index, repo ->   repo.name = "${index}.${repo.name}" }
 
             lst.postValue(l)
-            title.postValue("${lst.value!!.size -1} repositories")
+            title.postValue("$totalCount repositories")
             bLoading.postValue(false)
 
         }, {
@@ -115,7 +120,7 @@ class MainViewModel :ViewModel(){
                     it.forEachIndexed { index, repo ->   repo.name = "${ lst.value!!.size + index}.${repo.name}" }
                 }
 
-                title.postValue("${lst.value!!.size - 1} repositories")
+                title.postValue("${totalCount} repositories")
                 bLoading.postValue(false)
 
             }
