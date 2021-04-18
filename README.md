@@ -60,7 +60,7 @@ object api {
 // @Query -> queryString value
 // @post -> post 방식 
 // Gson 사용하기를 하더라도 리턴값을 JSonObject로 정하고 가져올 수 있다. 
-interface ApiService {
+interface GithubReq {
     
     // suspend 사용.
     // 코루틴에서 사용하기 위함. API호출시 리턴값으로 바로 데이터 값을 가져온다. 
