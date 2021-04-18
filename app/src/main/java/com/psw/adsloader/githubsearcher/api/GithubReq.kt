@@ -10,7 +10,7 @@ import retrofit2.http.*
 import retrofit2.http.GET
 
 
-interface ApiService {
+interface GithubReq {
 
     // 코루틴 내에서 간편하게 사용하기 위한 suspend를 이용한 API
     @GET("/users/{user}")

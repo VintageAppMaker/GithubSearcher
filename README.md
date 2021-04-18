@@ -34,12 +34,12 @@ object api {
     val builder = OkHttpClient.Builder()
         .addInterceptor( HttpLoggingInterceptor().apply {
 
-            // 3. Debug시에 모든 패킷을 덤프
+            // Debug시에 모든 패킷을 덤프
             setLevel(HttpLoggingInterceptor.Level.BODY)
 
         } )
 
-    val function: ApiService
+    val github: GithubReq
         get() {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE)
@@ -47,7 +47,7 @@ object api {
                 .client(builder.build())
                 .build()
 
-            return retrofit.create<ApiService>(ApiService::class.java!!)
+            return retrofit.create<GithubReq>(GithubReq::class.java!!)
         }
 }
 ~~~

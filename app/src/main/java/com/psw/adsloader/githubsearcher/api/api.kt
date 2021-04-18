@@ -15,7 +15,7 @@ object api {
 
         } )
 
-    val function: ApiService
+    val github: GithubReq
         get() {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE)
@@ -23,6 +23,6 @@ object api {
                 .client(builder.build())
                 .build()
 
-            return retrofit.create<ApiService>(ApiService::class.java!!)
+            return retrofit.create<GithubReq>(GithubReq::class.java!!)
         }
 }

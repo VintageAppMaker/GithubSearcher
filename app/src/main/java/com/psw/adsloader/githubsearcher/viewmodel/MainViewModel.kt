@@ -34,7 +34,7 @@ class MainViewModel :ViewModel(){
         // UI처리는 반드시 LiveData로 보낸다.
         // 그렇게 하지않으면 Context간의 차이로 App이 종료됨
         IORoutine({
-            val u = api.function.getUser(account.value.toString())
+            val u = api.github.getUser(account.value.toString())
             if(u == null) return@IORoutine
 
             // 데이터처리
@@ -58,7 +58,7 @@ class MainViewModel :ViewModel(){
         bLoading.postValue(true)
 
         IORoutine({
-            val l = api.function.listRepos(account.value.toString())
+            val l = api.github.listRepos(account.value.toString())
             if(l == null){
                 bLoading.postValue(false)
                 toNextPageWithEnd(true)
@@ -90,7 +90,7 @@ class MainViewModel :ViewModel(){
         bLoading.postValue(true)
 
         // 코루틴을 사용하지 않는방법
-        api.function.listReposWithPage(account.value.toString(), MainActivity.nNextPage).enqueue( object:
+        api.github.listReposWithPage(account.value.toString(), MainActivity.nNextPage).enqueue( object:
             Callback<List<Repo>> {
 
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
