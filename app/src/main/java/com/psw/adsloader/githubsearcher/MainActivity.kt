@@ -1,6 +1,8 @@
 package com.psw.adsloader.githubsearcher
 
 
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,6 +22,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.psw.adsloader.githubsearcher.model.GithubData
+import com.psw.adsloader.githubsearcher.util.setBottomSystemBarColor
+import com.psw.adsloader.githubsearcher.util.setOverSystemMenu
 
 
 class MainActivity : AppCompatActivity() {
@@ -71,6 +75,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewmodel.account.postValue("google")
+
+        setUpSystemArea()
+
+    }
+
+    private fun setUpSystemArea() {
+        // Systembar 침범
+        setOverSystemMenu()
+
+        // 하단 네비게이션 메뉴 색상변경
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setBottomSystemBarColor(getColor(R.color.colorBottomSystem))
+        }
 
     }
 

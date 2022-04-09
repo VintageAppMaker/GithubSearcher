@@ -119,7 +119,7 @@ class MainViewModel :ViewModel(){
                 lst.postValue(repos)
 
                 repos?.let{
-                    it.forEachIndexed { index, repo ->   repo.name = "${ lst.value!!.size + index}.${repo.name}" }
+                    it.forEachIndexed { index, repo ->   repo.name = "${repo.name}" }
                 }
 
                 title.postValue("${totalCount} repositories")

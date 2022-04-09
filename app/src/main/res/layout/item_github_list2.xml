@@ -34,6 +34,7 @@
 
 
                 <TextView
+                        android:ellipsize="end"
                         android:gravity="center"
                         android:layout_weight="1"
                         android:textSize="24dp"
@@ -43,8 +44,8 @@
                         android:id="@+id/txtName"
                         />
                 <ImageView
-                        android:background="#9A7DE1"
-                        android:src="@drawable/button"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/unchecked_star"
                         android:layout_width="32dp"
                         android:layout_height="32dp"/>
 

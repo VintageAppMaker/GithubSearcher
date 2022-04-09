@@ -30,7 +30,8 @@
                     android:gravity="center"
                     android:text="@{data.title}"
                     android:layout_width="match_parent"
-                    android:padding="25dp"
+                    android:layout_marginTop="15dp"
+                    android:padding="15dp"
                     android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -47,7 +48,7 @@
                 android:background="@color/colorBackground"
                 app:itemIconSize="20dp"
                 app:itemIconTint="#FFFFFF"
-                app:itemTextColor="#00FFFF"
+                app:itemTextColor="#FFFFFF"
                 app:itemHorizontalTranslationEnabled="false"
                 app:labelVisibilityMode="labeled"
                 app:layout_constraintBottom_toBottomOf="parent"

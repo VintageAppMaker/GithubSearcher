@@ -97,6 +97,11 @@ class githubHolder (view: View) : RecyclerView.ViewHolder(view) {
     // findViewById()를 이용하는 것이 바람직함
     var txtDescription : TextView = view.txtDescription
 
+    lateinit var vHolder : View
+    init {
+        vHolder = view
+    }
+
     fun bind(context : Context, item : Repo){
         txtNumber.text = item.id
         txtName.text = item.name
@@ -105,11 +110,12 @@ class githubHolder (view: View) : RecyclerView.ViewHolder(view) {
 
         txtDescription.apply{
             text = if ( item.description != null )  item.description else "설명없음"
-            setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(intent)
-            }
+        }
+
+        vHolder.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
         }
 
     }
@@ -119,6 +125,11 @@ class githubHolder2 (view: View) : RecyclerView.ViewHolder(view) {
     var txtName : TextView = view.txtName
     var txtCloneUrl : TextView = view.txtCloneUrl
 
+    lateinit var vHolder : View
+    init {
+        vHolder = view
+    }
+
     // XML에서 같은 ID가 있을 경우, 에러가 발생한다.
     // findViewById()를 이용하는 것이 바람직함
     var txtDescription : TextView = view.txtDescription2
@@ -127,7 +138,8 @@ class githubHolder2 (view: View) : RecyclerView.ViewHolder(view) {
         txtName.text = item.name
         txtCloneUrl.text = item.clone_url
         txtDescription.text = if ( item.description != null )  item.description else "설명없음"
-        txtCloneUrl.setOnClickListener {
+
+        vHolder.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
