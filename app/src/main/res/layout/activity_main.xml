@@ -10,6 +10,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -23,17 +24,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/linearLayout">
             <TextView
-                    android:textSize="24sp"
-                    android:textColor="#eeeeee"
-                    android:background="@color/colorBackground"
+                    android:textSize="24dp"
+                    android:textColor="#A736D6"
                     android:id="@+id/txtTitle"
                     android:gravity="center"
                     android:text="@{data.title}"
                     android:layout_width="match_parent"
+                    android:padding="25dp"
                     android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:background="@color/colorBackgroundRecycler"
                     android:id="@+id/rcyMain"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

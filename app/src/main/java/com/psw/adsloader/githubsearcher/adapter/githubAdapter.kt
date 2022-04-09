@@ -88,12 +88,17 @@ class GithubAdapter(val items : List<GithubData>, val context: Context) : Recycl
 
 
 class githubHolder (view: View) : RecyclerView.ViewHolder(view) {
-    var txtName : TextView = view.txtName
-    var txtSize : TextView = view.txtSize
-    var txtStar : TextView = view.txtStar
+    var txtNumber : TextView = view.txtNumber
+    var txtName   : TextView = view.txtName
+    var txtSize   : TextView = view.txtSize
+    var txtStar   : TextView = view.txtStar
+
+    // XML에서 같은 ID가 있을 경우, 에러가 발생한다.
+    // findViewById()를 이용하는 것이 바람직함
     var txtDescription : TextView = view.txtDescription
 
     fun bind(context : Context, item : Repo){
+        txtNumber.text = item.id
         txtName.text = item.name
         txtSize.text = item.size.toString()
         txtStar.text = item.stargazers_count.toString()
@@ -114,9 +119,14 @@ class githubHolder2 (view: View) : RecyclerView.ViewHolder(view) {
     var txtName : TextView = view.txtName
     var txtCloneUrl : TextView = view.txtCloneUrl
 
+    // XML에서 같은 ID가 있을 경우, 에러가 발생한다.
+    // findViewById()를 이용하는 것이 바람직함
+    var txtDescription : TextView = view.txtDescription2
+
     fun bind(context : Context,item : Repo){
         txtName.text = item.name
         txtCloneUrl.text = item.clone_url
+        txtDescription.text = if ( item.description != null )  item.description else "설명없음"
         txtCloneUrl.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.clone_url))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

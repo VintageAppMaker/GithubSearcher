@@ -73,7 +73,9 @@ class MainViewModel :ViewModel(){
 
             toNextPageWithEnd()
 
-            l?.forEachIndexed { index, repo ->   repo.name = "${index}.${repo.name}" }
+            l?.forEachIndexed { index, repo ->
+                repo.name = "${repo.name}"
+            }
 
             lst.postValue(l)
             title.postValue("$totalCount repositories")

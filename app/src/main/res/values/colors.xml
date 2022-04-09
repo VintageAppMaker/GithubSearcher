@@ -3,13 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorBackground">#333333</color>
-    <color name="colorCardText">#333333</color>
-    <color name="colorCardBackground">#eeeeee</color>
-    <color name="colorCardBackground2">#FC7777</color>
-    <color name="colorCardBackground3">#8BC34A</color>
+    <color name="colorBackground">#512DA8</color>
+    <color name="colorCardText">#aaaaaa</color>
+    <color name="colorCardBackground">#7542F0</color>
+    <color name="colorCardBackground2">#512DA8</color>
+    <color name="colorCardBackground3">#6A0D91</color>
     <color name="colorBackgroundRecycler">#333333</color>
-    <color name="colorHyperLink">#0159BD</color>
+    <color name="colorHyperLink">#A2F758</color>
 
 
 

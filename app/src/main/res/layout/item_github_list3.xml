@@ -1,203 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:background="@color/colorBackgroundRecycler"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ignore="NamespaceTypo">
 
     <androidx.cardview.widget.CardView
             card_view:cardBackgroundColor="@color/colorCardBackground3"
-
-            android:layout_marginTop    ="4dp"
             android:layout_marginLeft   ="15dp"
             android:layout_marginRight  ="15dp"
-            android:layout_marginBottom ="4dp"
+            android:layout_marginBottom="4dp"
 
-            card_view:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            card_view:cardCornerRadius="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <LinearLayout
-                android:orientation="vertical"
+        <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:weightSum="1"
+
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
-                <TextView
-                        android:gravity="center|left"
-                        android:text="account"
-                        android:textColor="@color/colorCardText"
-                        android:layout_weight="0.3"
-                        android:layout_margin="5dp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"/>
-
-
-                <TextView
-                        android:id="@+id/txtAccount"
-                        android:textSize="24sp"
-                        android:textColor="@color/colorCardText"
-                        android:gravity="center"
-                        android:text="User"
-                        android:layout_weight="0.7"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:background="@color/colorCardBackground"
-                    android:weightSum="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <ImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_weight="0.4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
 
                 <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="0.6"
-                        android:layout_width="0dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                    <LinearLayout
-                            android:orientation="horizontal"
-                            android:weightSum="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                    <TextView
+                            android:id="@+id/txtAccount"
+                            android:textSize="24sp"
+                            android:textColor="@color/colorCardText"
+                            android:gravity="center"
+                            android:text="User"
+                            android:padding="5dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
 
-                        <TextView
-                                android:alpha="0.5"
-                                android:gravity="center|left"
-                                android:textColor="@color/colorCardText"
-                                android:text="public"
-                                android:layout_weight="0.2"
-                                android:layout_margin="5dp"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"/>
+                </LinearLayout>
 
-                        <TextView
-                                android:id="@+id/txtPublic"
-                                android:textColor="@color/colorCardText"
-                                android:gravity="center|left"
-                                android:text="User"
-                                android:layout_weight="0.8"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"/>
+                <View
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/colorBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
 
-                    </LinearLayout>
+                <LinearLayout
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <LinearLayout
-                            android:orientation="horizontal"
-                            android:weightSum="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        <TextView
-                                android:alpha="0.5"
-                                android:gravity="center|left"
-                                android:textColor="@color/colorCardText"
-                                android:text="gist"
-                                android:layout_weight="0.2"
-                                android:layout_margin="5dp"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"/>
-
-                        <TextView
-                                android:id="@+id/txtGist"
-                                android:textColor="@color/colorCardText"
-                                android:gravity="center|left"
-                                android:text="User"
-                                android:layout_weight="0.8"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"/>
-
-                    </LinearLayout>
+                    <ImageView
+                            android:layout_marginLeft="5dp"
+                            android:id="@+id/imgProfile"
+                            android:layout_weight="0.4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"/>
 
                     <LinearLayout
-                            android:orientation="horizontal"
-                            android:weightSum="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_weight="0.6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
 
-                        <TextView
-                                android:alpha="0.5"
-                                android:gravity="center|left"
-                                android:textColor="@color/colorCardText"
-                                android:text="Followers"
-                                android:layout_weight="0.4"
-                                android:layout_margin="5dp"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"/>
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:weightSum="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                        <TextView
-                                android:id="@+id/txtFollowers"
-                                android:textColor="@color/colorCardText"
-                                android:gravity="center|left"
-                                android:text="User"
-                                android:layout_weight="0.6"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"/>
+                            <TextView
+                                    android:alpha="0.5"
+                                    android:gravity="center|left"
+                                    android:textColor="@color/colorCardText"
+                                    android:text="public"
+                                    android:layout_weight="0.2"
+                                    android:layout_margin="5dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"/>
+
+                            <TextView
+                                    android:id="@+id/txtPublic"
+                                    android:textColor="@color/colorCardText"
+                                    android:gravity="center|left"
+                                    android:text="User"
+                                    android:layout_weight="0.8"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:weightSum="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            <TextView
+                                    android:alpha="0.5"
+                                    android:gravity="center|left"
+                                    android:textColor="@color/colorCardText"
+                                    android:text="gist"
+                                    android:layout_weight="0.2"
+                                    android:layout_margin="5dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"/>
+
+                            <TextView
+                                    android:id="@+id/txtGist"
+                                    android:textColor="@color/colorCardText"
+                                    android:gravity="center|left"
+                                    android:text="User"
+                                    android:layout_weight="0.8"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:weightSum="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            <TextView
+                                    android:alpha="0.5"
+                                    android:gravity="center|left"
+                                    android:textColor="@color/colorCardText"
+                                    android:text="Followers"
+                                    android:layout_weight="0.4"
+                                    android:layout_margin="5dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"/>
+
+                            <TextView
+                                    android:id="@+id/txtFollowers"
+                                    android:textColor="@color/colorCardText"
+                                    android:gravity="center|left"
+                                    android:text="User"
+                                    android:layout_weight="0.6"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:weightSum="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            <TextView
+                                    android:alpha="0.5"
+                                    android:gravity="center|left"
+                                    android:textColor="@color/colorCardText"
+                                    android:text="Following"
+                                    android:layout_weight="0.4"
+                                    android:layout_margin="5dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"/>
+
+                            <TextView
+                                    android:id="@+id/txtFollowing"
+                                    android:textColor="@color/colorCardText"
+                                    android:gravity="center|left"
+                                    android:text="User"
+                                    android:layout_weight="0.6"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+
 
                     </LinearLayout>
-
-                    <LinearLayout
-                            android:orientation="horizontal"
-                            android:weightSum="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        <TextView
-                                android:alpha="0.5"
-                                android:gravity="center|left"
-                                android:textColor="@color/colorCardText"
-                                android:text="Following"
-                                android:layout_weight="0.4"
-                                android:layout_margin="5dp"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"/>
-
-                        <TextView
-                                android:id="@+id/txtFollowing"
-                                android:textColor="@color/colorCardText"
-                                android:gravity="center|left"
-                                android:text="User"
-                                android:layout_weight="0.6"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"/>
-
-                    </LinearLayout>
-
 
 
                 </LinearLayout>
 
 
+
+                <TextView
+                        android:layout_margin="10dp"
+                        android:id="@+id/txtBio"
+                        android:textColor="@color/colorCardText"
+                        android:gravity="center|left"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
-
-
-            <TextView
-                    android:layout_margin="10dp"
-                    android:id="@+id/txtBio"
-                    android:textColor="@color/colorCardText"
-                    android:gravity="center|left"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
+        </FrameLayout>
 
 
     </androidx.cardview.widget.CardView>
