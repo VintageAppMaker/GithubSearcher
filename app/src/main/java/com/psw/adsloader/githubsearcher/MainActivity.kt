@@ -1,29 +1,30 @@
 package com.psw.adsloader.githubsearcher
 
 
-import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
+import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.SearchView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.psw.adsloader.githubsearcher.adapter.GithubAdapter
 import com.psw.adsloader.githubsearcher.databinding.ActivityMainBinding
-import com.psw.adsloader.githubsearcher.util.toast
-import com.psw.adsloader.githubsearcher.view.MainActivityData
-
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.psw.adsloader.githubsearcher.viewmodel.MainViewModel
-import android.text.InputType
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import com.psw.adsloader.githubsearcher.model.GithubData
+import com.psw.adsloader.githubsearcher.util.QuickDialog
 import com.psw.adsloader.githubsearcher.util.setBottomSystemBarColor
 import com.psw.adsloader.githubsearcher.util.setOverSystemMenu
+import com.psw.adsloader.githubsearcher.util.toast
+import com.psw.adsloader.githubsearcher.view.MainActivityData
+import com.psw.adsloader.githubsearcher.viewmodel.MainViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,7 +49,9 @@ class MainActivity : AppCompatActivity() {
                 (R.id.menu_search)   -> {
                     adapter.clearItems()
                     viewmodel.title.postValue("${adapter.mItems.size} repositories")
-                    askUser()
+                    //askUser()
+
+                    requestAccount()
                 }
                 else -> {}
             }
@@ -80,6 +83,34 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun requestAccount() {
+        QuickDialog().apply {
+
+            QShow(this@MainActivity.supportFragmentManager, "search") { fnDismiss ->
+                val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val view = inflater.inflate(R.layout.dialog_ask, null)
+
+                view?.apply {
+                    findViewById<androidx.appcompat.widget.SearchView>(R.id.searchAccount)?.apply {
+                        queryHint = "enter github account"
+                        setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                            override fun onQueryTextChange(newText: String): Boolean {
+                                return true
+                            }
+
+                            override fun onQueryTextSubmit(query: String): Boolean {
+                                viewmodel.account.postValue(query)
+                                dismiss()
+                                return true
+                            }
+                        })
+                    }
+                }
+                return@QShow view
+            }
+        }
+    }
+
     private fun setUpSystemArea() {
         // Systembar 침범
         setOverSystemMenu()
@@ -100,6 +131,9 @@ class MainActivity : AppCompatActivity() {
             })
 
             account.observe(this@MainActivity, Observer<String> {
+                // 이전데이터 삭제
+                adapter.clearItems()
+
                 // 이름이 바뀌면 바로검색
                 loadUserInfo()
                 // 레포정보를 추가

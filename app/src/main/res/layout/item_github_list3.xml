@@ -8,7 +8,7 @@
         app:ignore="NamespaceTypo">
 
     <androidx.cardview.widget.CardView
-            card_view:cardBackgroundColor="@color/colorCardBackground3"
+            android:background="#00000000"
             android:layout_marginLeft   ="15dp"
             android:layout_marginRight  ="15dp"
             android:layout_marginBottom="4dp"
@@ -23,6 +23,13 @@
                 android:layout_height="match_parent">
 
             <LinearLayout
+                    android:alpha="0.75"
+                    android:background="#512DA8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            <LinearLayout
+                    android:alpha="1"
 
                     android:orientation="vertical"
                     android:layout_width="match_parent"

@@ -7,7 +7,7 @@
 - RecyclerView(MultiViewHolder)
 를 간략하게 사용한 예제
 
-![](anim.gif)
+![](githubsearch.gif)
 
 ### retrofit 설정  
 > retfrofit2 설정방법 정리 
