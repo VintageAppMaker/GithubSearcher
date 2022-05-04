@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 if ( !recyclerView.canScrollVertically(1) ){
                     if(viewmodel.bLoading.value == false){
 
-                        if(nNextPage == IS_END_PAGE) return
+                        if(viewmodel.nNextPage == viewmodel.IS_END_PAGE) return
                         toast("다음페이지를 읽습니다.")
                         viewmodel.loadRepoInfoWithPage()
                     }
@@ -174,12 +174,6 @@ class MainActivity : AppCompatActivity() {
 
         builder.show()
 
-    }
-
-    companion object {
-        val FIRST_PAGE  =  1
-        var nNextPage   =  FIRST_PAGE
-        val IS_END_PAGE = -1 // -1이면 end
     }
 
 

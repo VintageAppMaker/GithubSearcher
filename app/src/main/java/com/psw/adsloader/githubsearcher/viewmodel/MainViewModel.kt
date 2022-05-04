@@ -19,15 +19,19 @@ class MainViewModel :ViewModel(){
 
     var message   : MutableLiveData< String > = MutableLiveData()
 
-    //귀찮다. repo 갯수
+    val FIRST_PAGE  =  1
+    var nNextPage   =  FIRST_PAGE
+    val IS_END_PAGE = -1 // -1이면 end
+
+    // repo 갯수
     var totalCount = 0
 
     init{
         bLoading.value = false
     }
 
-    fun loadUserInfo() {
-        MainActivity.nNextPage = MainActivity.FIRST_PAGE
+        fun loadUserInfo() {
+        nNextPage = FIRST_PAGE
         bLoading.postValue(true)
 
         // 코투틴과 Retrofit 사용방법을 위한 예제
@@ -54,7 +58,7 @@ class MainViewModel :ViewModel(){
     }
 
     fun loadRepoInfo() {
-        MainActivity.nNextPage = MainActivity.FIRST_PAGE
+        nNextPage = FIRST_PAGE
         bLoading.postValue(true)
 
         IORoutine({
@@ -92,7 +96,7 @@ class MainViewModel :ViewModel(){
         bLoading.postValue(true)
 
         // 코루틴을 사용하지 않는방법
-        api.github.listReposWithPage(account.value.toString(), MainActivity.nNextPage).enqueue( object:
+        api.github.listReposWithPage(account.value.toString(), nNextPage).enqueue( object:
             Callback<List<Repo>> {
 
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
@@ -131,10 +135,9 @@ class MainViewModel :ViewModel(){
     }
 
     private fun toNextPageWithEnd(bIsEnd : Boolean = false ){
-        if(MainActivity.nNextPage != MainActivity.IS_END_PAGE) MainActivity.nNextPage++
+        if(nNextPage != IS_END_PAGE) nNextPage++
         if( bIsEnd )
-            MainActivity.nNextPage = MainActivity.IS_END_PAGE
+            nNextPage = IS_END_PAGE
     }
-
 
 }
