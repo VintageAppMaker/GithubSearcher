@@ -30,7 +30,7 @@ class MainViewModel :ViewModel(){
         bLoading.value = false
     }
 
-        fun loadUserInfo() {
+    fun loadUserInfo() {
         nNextPage = FIRST_PAGE
         bLoading.postValue(true)
 
